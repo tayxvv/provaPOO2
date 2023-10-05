@@ -26,7 +26,7 @@ async def get_curso_id(curso: CursoByIdRequest):
     for cursos in listaCurso:
         if cursos['id'] == curso.id:
             return JSONResponse(content={"message": cursos}, status_code=201)
-    return JSONResponse(content={"message": "Curso não encontrado!"}, status_code=201)
+    return JSONResponse(content={"message": "Curso não encontrado!"}, status_code=404)
 
 @curso_router.put('/curso/alter', summary="Alterar um curso")
 async def put_curso(curso: CursoRequest):
@@ -37,7 +37,7 @@ async def put_curso(curso: CursoRequest):
             cursos['horas'] = curso.horas
             cursos['dia'] = curso.dia
             return JSONResponse(content={"message": cursos}, status_code=201)
-    return JSONResponse(content={"message": "Curso não encontrado!"}, status_code=201)
+    return JSONResponse(content={"message": "Curso não encontrado!"}, status_code=404)
 
 @curso_router.delete('/curso/delete', summary="Deletar um curso")
 async def delete_curso(curso: CursoByIdRequest):
@@ -45,4 +45,4 @@ async def delete_curso(curso: CursoByIdRequest):
         if cursos['id'] == curso.id:
             listaCurso.remove(cursos)
             return JSONResponse(content={"message": "Deletado com sucesso"}, status_code=201)
-    return JSONResponse(content={"message": "Curso não encontrado!"}, status_code=201)
+    return JSONResponse(content={"message": "Curso não encontrado!"}, status_code=404)
